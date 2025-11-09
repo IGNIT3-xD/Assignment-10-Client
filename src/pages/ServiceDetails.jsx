@@ -30,6 +30,8 @@ const ServiceDetails = () => {
         e.preventDefault()
         const name = e.target.name.value;
         const email = e.target.email.value;
+        const phone = e.target.phone.value;
+        const address = e.target.address.value;
         const price = e.target.price.value;
         const date = e.target.date.value;
 
@@ -49,7 +51,11 @@ const ServiceDetails = () => {
         const book = {
             customer_name: name,
             customer_email: email,
+            customer_phone: phone,
+            customer_address: address,
             service_id: data._id,
+            service_name: data.serviceName,
+            provider_email: data.providerEmail,
             price,
             date
         }
@@ -111,6 +117,10 @@ const ServiceDetails = () => {
                                         <input type="text" name='name' defaultValue={user.displayName} readOnly className="input text-black/80" />
                                         <label className="label">Email</label>
                                         <input type="email" name='email' defaultValue={user.email} readOnly className="input text-black/80" />
+                                        <label className="label">Phone No.</label>
+                                        <input type="number" required name='phone' className="input" placeholder='Phone No.' />
+                                        <label className="label">Address</label>
+                                        <input type="text" required name='address' className="input" placeholder='Address' />
                                         <label className="label">Price / Hour ($)</label>
                                         <input type="number" readOnly name='price' defaultValue={data?.ratePerHour} className="input text-black/80" />
                                         <label className="label">Booking Date</label>
