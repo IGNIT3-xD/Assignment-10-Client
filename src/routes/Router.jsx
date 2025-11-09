@@ -5,15 +5,20 @@ import Services from './../pages/Services';
 import MyServices from './../pages/MyServices';
 import AddServices from './../pages/AddServices';
 import MyBookings from './../pages/MyBookings';
+import Login from "../pages/Login";
+import Register from "../pages/Register";
+import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
     {
+        hydrateFallbackElement: <p className="text-2xl font-bold text-center my-10">Loading...</p>,
         path: "/",
         Component: Root,
         children: [
             {
                 index: true,
-                element: <Home />
+                element: <Home />,
+                loader: () => fetch('http://localhost:5000/services').then(res => res.json())
             },
             {
                 path: 'services',
@@ -21,15 +26,23 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'my-services',
-                element: <MyServices />
+                element: <PrivateRoute><MyServices /></PrivateRoute>
             },
             {
                 path: 'add-services',
-                element: <AddServices />
+                element: <PrivateRoute><AddServices /></PrivateRoute>
             },
             {
                 path: 'my-bookings',
-                element: <MyBookings />
+                element: <PrivateRoute><MyBookings /></PrivateRoute>
+            },
+            {
+                path: 'auth/login',
+                element: <Login></Login>
+            },
+            {
+                path: '/auth/registration',
+                element: <Register></Register>
             }
         ]
     },

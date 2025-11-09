@@ -1,20 +1,37 @@
-import React from 'react';
+import React, { use } from 'react';
 import { Link, NavLink } from 'react-router';
 import logo from '../assets/logo.png';
 import { IoMdHome } from "react-icons/io";
 import { MdCleaningServices, MdMiscellaneousServices } from "react-icons/md";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { MdAddChart } from "react-icons/md";
+import { AuthContext } from './../contexts/AuthContext';
+import { toast } from 'react-toastify';
+import userImg from '../assets/user.png';
 
 const Navbar = () => {
+    const { user, logoutUser, setUser } = use(AuthContext)
 
     const links = <>
         <li><NavLink to={'/'}><IoMdHome /> Home</NavLink></li>
         <li><NavLink to={'/services'}><MdCleaningServices /> Services</NavLink></li>
-        <li><NavLink to={'/my-services'}><MdMiscellaneousServices /> My Services</NavLink></li>
-        <li><NavLink to={'/add-services'}><IoMdAddCircleOutline />Add Services</NavLink></li>
-        <li><NavLink to={'/my-bookings'}><MdAddChart /> My Bookings</NavLink></li>
+        {
+            user && <>
+                <li><NavLink to={'/my-services'}><MdMiscellaneousServices /> My Services</NavLink></li>
+                <li><NavLink to={'/add-services'}><IoMdAddCircleOutline />Add Services</NavLink></li>
+                <li><NavLink to={'/my-bookings'}><MdAddChart /> My Bookings</NavLink></li>
+            </>
+        }
     </>
+
+    const handleLogout = () => {
+        logoutUser()
+            .then(() => {
+                setUser(null)
+                toast.success('Logout Successfully !!')
+            })
+            .catch(err => toast.error(err.code))
+    }
 
     return (
         <div className="fixed left-1/2 top-0 transform -translate-x-1/2 z-10 navbar backdrop-filter backdrop-blur-lg lg:px-14 shadow-sm">
@@ -40,7 +57,22 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to={'/auth/login'} className='btn bg-amber-300 border-none btn-xs md:btn-md'>Login/Regsister</Link>
+                {
+                    !user ?
+                        <Link to={'/auth/login'} className='btn bg-amber-300 border-none btn-xs md:btn-md'>Login/Regsister</Link> :
+                        <>
+                            <div className="dropdown">
+                                <img tabIndex={0} role="button" src={user.photoURL ? user.photoURL : userImg} className='w-12 rounded-full cursor-pointer' alt="" />
+                                <ul tabIndex="-1" className="space-y-4 dropdown-content menu bg-base-100 rounded-box z-1 w-fit p-4 shadow-sm">
+                                    <li>{user?.displayName}</li>
+                                    <li>{user?.email}</li>
+                                    <li><Link to={'/profile'}>View Profile</Link></li>
+                                    <div className='divider'></div>
+                                    <li onClick={handleLogout} className='cursor-pointer hover:text-info'>Logout</li>
+                                </ul>
+                            </div>
+                        </>
+                }
             </div>
         </div>
     );
