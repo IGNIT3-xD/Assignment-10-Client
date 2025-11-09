@@ -1,9 +1,36 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useAxios } from './../hooks/useAxios';
+import Card2 from './../components/Card2';
 
 const Services = () => {
+    const [data, setData] = useState([])
+    const [loading, setLoading] = useState(true)
+    const instance = useAxios()
+
+    useEffect(() => {
+        instance.get('/services')
+            .then(res => {
+                // console.log(res.data);
+                setData(res.data)
+                setLoading(false)
+            })
+    }, [instance])
+
+    if (loading) {
+        return <p className='my-20 text-3xl font-bold text-center'>Loading...</p>
+    }
+
     return (
-        <div>
-            Services
+        <div className='w-11/12 mx-auto'>
+            <h1 className='font-bold text-2xl md:text-3xl text-center my-6'>All <span className='text-amber-300'> Services </span></h1>
+            <div className='divider w-1/2 mx-auto'></div>
+            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10'>
+                {
+                    data.map(service => <Card2 key={service._id} service={service}></Card2>)
+                }
+            </div>
         </div>
     );
 };

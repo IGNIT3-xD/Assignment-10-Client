@@ -62,13 +62,13 @@ const Navbar = () => {
                         <Link to={'/auth/login'} className='btn bg-amber-300 border-none btn-xs md:btn-md'>Login/Regsister</Link> :
                         <>
                             <div className="dropdown">
-                                <img tabIndex={0} role="button" src={user.photoURL ? user.photoURL : userImg} className='w-12 rounded-full cursor-pointer' alt="" />
-                                <ul tabIndex="-1" className="space-y-4 dropdown-content menu bg-base-100 rounded-box z-1 w-fit p-4 shadow-sm">
-                                    <li>{user?.displayName}</li>
-                                    <li>{user?.email}</li>
-                                    <li><Link to={'/profile'}>View Profile</Link></li>
-                                    <div className='divider'></div>
-                                    <li onClick={handleLogout} className='cursor-pointer hover:text-info'>Logout</li>
+                                <div tabIndex={0} role="button" className='flex items-center gap-2 cursor-pointer'>
+                                    <img src={user.photoURL ? user.photoURL : userImg} className='w-12 rounded-full ' alt="" />
+                                    <p className='font-medium'>{user?.displayName}</p>
+                                </div>
+                                <ul tabIndex="-1" className="space-y-4 dropdown-content menu bg-base-100 rounded-box z-1 w-fit p-2 shadow-sm">
+                                    <li><Link className='hover:text-amber-300' to={'/profile'}>View Profile</Link></li>
+                                    <li onClick={handleLogout} className='btn cursor-pointer hover:text-amber-300'>Logout</li>
                                 </ul>
                             </div>
                         </>

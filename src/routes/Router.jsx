@@ -8,6 +8,8 @@ import MyBookings from './../pages/MyBookings';
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
+import ServiceDetails from "../pages/ServiceDetails";
 
 export const router = createBrowserRouter([
     {
@@ -18,7 +20,7 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home />,
-                loader: () => fetch('http://localhost:5000/services').then(res => res.json())
+                loader: () => fetch('http://localhost:5000/top-services').then(res => res.json())
             },
             {
                 path: 'services',
@@ -27,6 +29,10 @@ export const router = createBrowserRouter([
             {
                 path: 'my-services',
                 element: <PrivateRoute><MyServices /></PrivateRoute>
+            },
+            {
+                path: 'services/:id',
+                element: <PrivateRoute><ServiceDetails /></PrivateRoute>
             },
             {
                 path: 'add-services',
@@ -38,11 +44,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'auth/login',
-                element: <Login></Login>
+                element: <PublicRoute><Login /></PublicRoute>
             },
             {
                 path: '/auth/registration',
-                element: <Register></Register>
+                element: <PublicRoute><Register /></PublicRoute>
             }
         ]
     },

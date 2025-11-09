@@ -1,32 +1,33 @@
 import React from 'react';
+import { Link } from 'react-router';
 import styled from 'styled-components';
 
 const Card2 = ({ service }) => {
-    // console.log(service);
-    const { serviceName, image, category, ratePerHour, rating } = service
+  // console.log(service);
+  const { serviceName, image, category, ratePerHour, rating } = service
 
-    return (
-        <StyledWrapper>
-            <div className="parent">
-                <div className="card">
-                    <img src={image} className='w-full h-[200px] object-cover' alt="" />
+  return (
+    <StyledWrapper>
+      <div className="parent">
+        <div className="card">
+          <img src={image} className='w-full h-[200px] object-cover' alt="" />
 
-                    <div className="content-box">
-                        <p className='badge badge-neutral'>{category}</p>
-                        <span className="card-title my-3">{serviceName}</span>
-                        <p className="card-content font-bold">
-                            $<span>{ratePerHour} </span>Rate Per Hour
-                        </p>
-                        <span className="see-more">Explore</span>
-                    </div>
-                    <div className="date-box">
-                        <span className="month">Rating</span>
-                        <span className="date">{rating}</span>
-                    </div>
-                </div>
-            </div>
-        </StyledWrapper>
-    );
+          <div className="content-box">
+            <p className='badge badge-neutral'>{category}</p>
+            <span className="card-title my-3">{serviceName}</span>
+            <p className="card-content font-bold">
+              $<span>{ratePerHour} </span>Rate Per Hour
+            </p>
+            <Link to={`/services/${service._id}`} className="see-more">Explore</Link>
+          </div>
+          <div className="date-box">
+            <span className="month">Rating</span>
+            <span className="date">{rating}</span>
+          </div>
+        </div>
+      </div>
+    </StyledWrapper>
+  );
 }
 
 const StyledWrapper = styled.div`
