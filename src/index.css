@@ -1,2 +1,10 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+body{
+    background-color: #eef7e8e1;
+}
+
+.navbar a.active{
+    @apply text-amber-300 underline
+}

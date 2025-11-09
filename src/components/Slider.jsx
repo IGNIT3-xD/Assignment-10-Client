@@ -13,7 +13,7 @@ import Button from './Button';
 
 const Slider = () => {
     return (
-        <Swiper className='absolute bottom-18 rounded-b-sm' modules={[Pagination, A11y, Autoplay]}
+        <Swiper className='' modules={[Pagination, A11y, Autoplay]}
             spaceBetween={50}
             autoplay={{
                 delay: 4000,
@@ -24,7 +24,7 @@ const Slider = () => {
         >
 
             <SwiperSlide>
-                <img className='w-full h-[450px] md:h-[500px] object-cover brightness-70' src={Banner1} alt="" />
+                <img className='w-full h-[450px] md:h-[550px] object-cover brightness-60' src={Banner1} alt="" />
                 <div className='text-white text-center absolute inset-0 flex items-center justify-center flex-col gap-4 p-5'>
                     <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold'>House<span className='text-amber-300'> Cleaning </span>Solution</h1>
                     <p className='lg:text-xl mx-auto'>always been so professional in handling our teams.</p>
@@ -33,7 +33,7 @@ const Slider = () => {
             </SwiperSlide>
 
             <SwiperSlide>
-                <img className='w-full h-[450px] md:h-[500px] object-cover brightness-70' src={Banner2} alt="" />
+                <img className='w-full h-[450px] md:h-[550px] object-cover brightness-60' src={Banner2} alt="" />
                 <div className='text-white text-center absolute inset-0 flex items-center justify-center flex-col gap-4 p-5'>
                     <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold'>House<span className='text-amber-300'> Cleaning </span>Solution</h1>
                     <p className='lg:text-xl mx-auto'>always been so professional in handling our teams.</p>
@@ -42,7 +42,7 @@ const Slider = () => {
             </SwiperSlide>
 
             <SwiperSlide>
-                <img className='w-full h-[450px] md:h-[500px] object-cover brightness-70' src={Banner3} alt="" />
+                <img className='w-full h-[450px] md:h-[550px] object-cover brightness-60' src={Banner3} alt="" />
                 <div className='text-white text-center absolute inset-0 flex items-center justify-center flex-col gap-4 p-5'>
                     <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold'>House<span className='text-amber-300'> Cleaning </span>Solution</h1>
                     <p className='lg:text-xl mx-auto'>always been so professional in handling our teams.</p>
