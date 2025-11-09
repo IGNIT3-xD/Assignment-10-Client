@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { use, useRef } from 'react';
 import { useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { useAxios } from '../hooks/useAxios';
 import { useEffect } from 'react';
 import { FaRegStar } from "react-icons/fa";
+import { AuthContext } from './../contexts/AuthContext';
+import Swal from 'sweetalert2';
 
 const ServiceDetails = () => {
     const { id } = useParams()
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(false)
     const instance = useAxios()
+    const modalRef = useRef()
+    const navigate = useNavigate()
+    const { user } = use(AuthContext)
 
     useEffect(() => {
         instance.get(`services/${id}`)
@@ -20,7 +26,51 @@ const ServiceDetails = () => {
             })
     }, [instance, id])
 
-    console.log(data);
+    const handleBook = (e) => {
+        e.preventDefault()
+        const name = e.target.name.value;
+        const email = e.target.email.value;
+        const price = e.target.price.value;
+        const date = e.target.date.value;
+
+        const selectedDate = new Date(date)
+        const todaysDate = new Date()
+
+        selectedDate.setHours(0, 0, 0, 0)
+        todaysDate.setHours(0, 0, 0, 0)
+
+        setError(false)
+        if (selectedDate <= todaysDate) {
+            // toast.error('Please Select A Future Date For Booking Services')
+            setError(true)
+            return
+        }
+
+        const book = {
+            customer_name: name,
+            customer_email: email,
+            service_id: data._id,
+            price,
+            date
+        }
+        // console.log(book);
+
+        instance.post('/booking', book)
+            .then(res => {
+                // console.log(res.data);
+                if (res.data.insertedId) {
+                    modalRef.current.close()
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Your booking has been saved",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+    }
+
 
     if (loading) {
         return <p className='my-20 text-3xl font-bold text-center'>Loading...</p>
@@ -49,11 +99,39 @@ const ServiceDetails = () => {
                     </div>
                     <div className="divider"></div>
                     <p className='text-xl font-bold'>Price: <span className='text-amber-300'>${data?.ratePerHour}</span> / hour</p>
-                    <button className='btn bg-amber-400 mt-3'>Book Now</button>
+                    <button onClick={() => modalRef.current.showModal()} className='btn bg-amber-400 mt-3'>Book Now</button>
+                    <button onClick={() => navigate(-1)} className='btn bg-amber-500 mt-3 ml-3'>← Go Back</button>
+                    <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
+                        <div className="modal-box">
+                            <h3 className="font-bold text-2xl text-center">Book Our Service Now !!</h3>
+                            <div className="my-3 card bg-base-100 w-full mx-auto max-w-sm shrink-0 shadow">
+                                <div className="card-body">
+                                    <form onSubmit={handleBook} className="fieldset">
+                                        <label className="label">Name</label>
+                                        <input type="text" name='name' defaultValue={user.displayName} readOnly className="input text-black/80" />
+                                        <label className="label">Email</label>
+                                        <input type="email" name='email' defaultValue={user.email} readOnly className="input text-black/80" />
+                                        <label className="label">Price / Hour ($)</label>
+                                        <input type="number" readOnly name='price' defaultValue={data?.ratePerHour} className="input text-black/80" />
+                                        <label className="label">Booking Date</label>
+                                        <input type="date" required name='date' className="input" />
+                                        {error && <p className='text-red-600 my-3 font-medium'>⚠ Please Select A Future Date For Booking Services</p>}
+                                        <button className="btn bg-amber-300">Book Now</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div className="modal-action">
+                                <form method="dialog">
+                                    <button className="btn">Close</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
                 </div>
             </div>
         </div>
     );
 };
+
 
 export default ServiceDetails;
