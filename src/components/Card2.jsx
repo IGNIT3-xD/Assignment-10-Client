@@ -22,7 +22,7 @@ const Card2 = ({ service }) => {
           </div>
           <div className="date-box">
             <span className="month">Rating</span>
-            <span className="date">{rating}</span>
+            <span className="date">{rating === null ? '--' : rating}</span>
           </div>
         </div>
       </div>
