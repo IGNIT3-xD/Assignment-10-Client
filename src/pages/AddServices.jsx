@@ -2,10 +2,12 @@ import React, { use } from 'react';
 import { AuthContext } from './../contexts/AuthContext';
 import { useAxios } from './../hooks/useAxios';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router';
 
 const AddServices = () => {
     const { user } = use(AuthContext)
     const instance = useAxios()
+    const navigate = useNavigate()
 
     const handleAddService = (e) => {
         e.preventDefault()
@@ -42,8 +44,11 @@ const AddServices = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
+
+                    e.target.reset()
+                    navigate('/services')
                 }
-                e.target.reset()
+
             })
     }
 
