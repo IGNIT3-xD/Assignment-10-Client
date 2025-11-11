@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import logo from '../assets/logo.png';
 import { IoMdHome } from "react-icons/io";
@@ -11,6 +11,7 @@ import userImg from '../assets/user.png';
 
 const Navbar = () => {
     const { user, logoutUser, setUser } = use(AuthContext)
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light")
 
     const links = <>
         <li><NavLink to={'/'}><IoMdHome /> Home</NavLink></li>
@@ -31,6 +32,17 @@ const Navbar = () => {
                 toast.success('Logout Successfully !!')
             })
             .catch(err => toast.error(err.code))
+    }
+
+    useEffect(() => {
+        const html = document.querySelector('html')
+        html.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
+    }, [theme])
+
+    const handleTheme = (checked) => {
+        // console.log(checked);
+        setTheme(checked ? "dark" : "light");
     }
 
     return (
@@ -61,6 +73,7 @@ const Navbar = () => {
                     !user ?
                         <Link to={'/auth/login'} className='btn bg-amber-300 border-none btn-xs md:btn-md'>Login/Regsister</Link> :
                         <>
+                            <input onChange={(e) => handleTheme(e.target.checked)} type="checkbox" defaultChecked className="toggle toggle-primary mr-3" />
                             <div className="dropdown">
                                 <div tabIndex={0} role="button" className='flex items-center gap-2 cursor-pointer'>
                                     <img src={user.photoURL ? user.photoURL : userImg} className='w-12 rounded-full ' alt="" />

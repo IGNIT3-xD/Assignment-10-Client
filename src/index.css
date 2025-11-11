@@ -1,10 +1,11 @@
 @import "tailwindcss";
-@plugin "daisyui";
 
-body{
-    background-color: #eef7e870;
+@plugin "daisyui" {
+    themes: light --default, dark --prefersdark;
 }
 
-.navbar a.active{
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+.navbar a.active {
     @apply text-amber-300 underline
 }
