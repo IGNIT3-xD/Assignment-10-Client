@@ -28,7 +28,7 @@ const PriceRange = ({ setData }) => {
 
 
     return (
-        <div className="flex flex-wrap justify-between items-center gap-4 bg-white/50 my-6 shadow-md rounded-xl p-6 w-[300px] hover:shadow-xl transition-all">
+        <div className="flex flex-wrap justify-between items-center gap-4 bg-base-200 my-6 shadow-md rounded-xl p-6 w-[300px] hover:shadow-xl transition-all">
             <h1 className="text-center font-medium">Filter By Price Range</h1>
             <div className="w-[280px]">
                 <Range

@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { use, useEffect } from 'react';
 import { Link, NavLink } from 'react-router';
 import logo from '../assets/logo.png';
 import { IoMdHome } from "react-icons/io";
@@ -10,8 +10,8 @@ import { toast } from 'react-toastify';
 import userImg from '../assets/user.png';
 
 const Navbar = () => {
-    const { user, logoutUser, setUser } = use(AuthContext)
-    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light")
+    const { user, logoutUser, setUser, theme, setTheme } = use(AuthContext)
+    // const [theme, setTheme] = useState(localStorage.getItem("theme") || "light")
 
     const links = <>
         <li><NavLink to={'/'}><IoMdHome /> Home</NavLink></li>

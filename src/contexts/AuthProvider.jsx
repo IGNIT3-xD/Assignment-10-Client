@@ -8,6 +8,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
     const provider = new GoogleAuthProvider()
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light")
 
     const registerUser = (email, password) => {
         setLoading(true)
@@ -51,6 +52,8 @@ const AuthProvider = ({ children }) => {
         user,
         setUser,
         loading,
+        theme,
+        setTheme
     }
 
     return (

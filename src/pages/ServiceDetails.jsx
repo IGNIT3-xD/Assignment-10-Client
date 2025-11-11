@@ -15,7 +15,7 @@ const ServiceDetails = () => {
     const instance = useAxios()
     const modalRef = useRef()
     const navigate = useNavigate()
-    const { user } = use(AuthContext)
+    const { user, theme } = use(AuthContext)
     const [revData, setRevData] = useState([])
 
     useEffect(() => {
@@ -85,7 +85,6 @@ const ServiceDetails = () => {
             })
     }
 
-
     if (loading) {
         return <p className='my-20 text-3xl font-bold text-center'>Loading...</p>
     }
@@ -93,16 +92,16 @@ const ServiceDetails = () => {
     return (
         <div className='my-10 w-11/12 mx-auto'>
             <div className='flex flex-col lg:flex-row gap-8 shadow p-4'>
-                <figure className='p-2 border border-black/5 rounded-sm'>
+                <figure className={`p-2 border border-black/5 ${theme === 'dark' && 'border-white/20'} rounded-sm`}>
                     <img className='mx-auto object-contain h-full rounded-sm md:w-full lg:w-96' src={data?.image} alt="" />
                 </figure>
                 <div className='flex-1'>
                     <p className='text-2xl font-bold'>{data?.serviceName}</p>
-                    <p className='text-black/60 mt-3'>{data?.description}</p>
+                    <p className={`text-black/60 ${theme === 'dark' && 'text-white/60'} mt-3`}>{data?.description}</p>
                     <div className="divider"></div>
-                    <p className='font-semibold'>Provider: <span className='text-black/70'>{data?.providerName}</span></p>
-                    <p className='font-semibold'>Provider Email: <span className='text-black/70'>{data?.providerEmail}</span></p>
-                    <p className='font-semibold'>Location: <span className='text-black/70'>{data?.location}</span></p>
+                    <p className='font-semibold'>Provider: <span className={`text-black/70 ${theme === 'dark' && 'text-white/70'}`}>{data?.providerName}</span></p>
+                    <p className='font-semibold'>Provider Email: <span className={`text-black/70 ${theme === 'dark' && 'text-white/70'}`}>{data?.providerEmail}</span></p>
+                    <p className='font-semibold'>Location: <span className={`text-black/70 ${theme === 'dark' && 'text-white/70'}`}>{data?.location}</span></p>
                     <div className="divider"></div>
                     <div className=''>
                         <p className='font-semibold flex items-center'>
@@ -122,15 +121,15 @@ const ServiceDetails = () => {
                                 <div className="card-body">
                                     <form onSubmit={handleBook} className="fieldset">
                                         <label className="label">Name</label>
-                                        <input type="text" name='name' defaultValue={user.displayName} readOnly className="input text-black/80" />
+                                        <input type="text" name='name' defaultValue={user.displayName} readOnly className={`input text-black/80 ${theme === 'dark' && 'text-white/80'}`} />
                                         <label className="label">Email</label>
-                                        <input type="email" name='email' defaultValue={user.email} readOnly className="input text-black/80" />
+                                        <input type="email" name='email' defaultValue={user.email} readOnly className={`input text-black/80 ${theme === 'dark' && 'text-white/80'}`} />
                                         <label className="label">Phone No.</label>
                                         <input type="number" required name='phone' className="input" placeholder='Phone No.' />
                                         <label className="label">Address</label>
                                         <input type="text" required name='address' className="input" placeholder='Address' />
                                         <label className="label">Price / Hour ($)</label>
-                                        <input type="number" readOnly name='price' defaultValue={data?.ratePerHour} className="input text-black/80" />
+                                        <input type="number" readOnly name='price' defaultValue={data?.ratePerHour} className={`input text-black/80 ${theme === 'dark' && 'text-white/80'}`} />
                                         <label className="label">Booking Date</label>
                                         <input type="date" required name='date' className="input" />
                                         {error && <p className='text-red-600 my-3 font-medium'>⚠ Please Select A Future Date For Booking Services</p>}
@@ -151,7 +150,7 @@ const ServiceDetails = () => {
             <div className='overflow-x-auto mb-10 mt-6'>
                 {
                     revData.length === 0 ? <p className='text-2xl font-bold text-center'>No <span className='text-amber-300'>Reviews</span> Yet</p> :
-                        <table className="table border border-black/10 bg-white">
+                        <table className={`table border border-base-200 bg-base-200`}>
                             <thead>
                                 <tr>
                                     <th>SL No.</th>

@@ -102,7 +102,7 @@ const MyServices = () => {
             {
                 data.length === 0 ? <p className='text-2xl my-10 text-center font-bold'>Currently you don't have any <span className='text-amber-300'>services</span></p> :
                     <div className='my-20 overflow-x-auto'>
-                        <table className="table border border-black/10 bg-white">
+                        <table className="table border border-base-300 bg-base-300">
                             <thead>
                                 <tr>
                                     <th>SL No.</th>
