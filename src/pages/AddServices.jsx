@@ -25,7 +25,7 @@ const AddServices = () => {
             category,
             providerName: name,
             providerEmail: email,
-            ratePerHour: price,
+            ratePerHour: Number(price),
             location,
             description: desc,
             image,

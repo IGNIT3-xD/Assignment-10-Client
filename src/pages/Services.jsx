@@ -23,17 +23,21 @@ const Services = () => {
         return <p className='my-20 text-3xl font-bold text-center'>Loading...</p>
     }
 
+    const maxPrice = Math.max(...data.map(service => service.ratePerHour || 0))
+    // console.log(maxPrice);
+
     return (
         <div className='w-11/12 mx-auto'>
             <div className='flex flex-col items-center my-6'>
                 <h1 className='font-bold text-2xl lg:text-3xl px-4 text-center'>All <span className='text-amber-300'> Services </span></h1>
                 <div>
-                    <PriceRange />
+                    <PriceRange maxPrice={maxPrice} setData={setData} />
                 </div>
             </div>
             <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {
-                    data.map(service => <Card2 key={service._id} service={service}></Card2>)
+                    data.length === 0 ? <p className='text-4xl font-bold text-center md:col-span-2 lg:col-span-3 mb-10'>No <span className='text-amber-300'>Service</span> Found</p> :
+                        data.map(service => <Card2 key={service._id} service={service}></Card2>)
                 }
             </div>
         </div>

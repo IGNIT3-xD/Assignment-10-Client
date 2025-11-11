@@ -68,7 +68,7 @@ const MyServices = () => {
         const upService = {
             serviceName,
             category,
-            ratePerHour: price,
+            ratePerHour: Number(price),
             location,
             description: desc,
             image,
@@ -165,7 +165,7 @@ const MyServices = () => {
                                     <input type="text" name='image' required defaultValue={selectedService.image} className="input" />
 
                                     <label className="label">Description</label>
-                                    <textarea  name='desc' required defaultValue={selectedService.description} className="textarea" placeholder="Description"></textarea>
+                                    <textarea name='desc' required defaultValue={selectedService.description} className="textarea" placeholder="Description"></textarea>
                                     <button className="btn bg-amber-300 mt-3">Update Now</button>
                                 </form>
                             </div>
