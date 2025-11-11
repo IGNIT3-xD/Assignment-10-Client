@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useAxios } from '../hooks/useAxios';
 import { use } from 'react';
 import { AuthContext } from './../contexts/AuthContext';
 import Swal from 'sweetalert2';
+import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
 
 const MyBookings = () => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const instance = useAxios()
     const { user } = use(AuthContext)
+    const modalRef = useRef()
+    const [id, setId] = useState(null)
+    const [rating, setRating] = useState(0)
+    const [comment, setComment] = useState('')
 
     useEffect(() => {
         instance.get(`/booking?email=${user.email}`)
@@ -48,6 +54,40 @@ const MyBookings = () => {
         });
     }
 
+    const handleModal = (id) => {
+        modalRef.current.showModal()
+        setId(id)
+    }
+
+    const handleReview = (e) => {
+        e.preventDefault()
+        // console.log(id);
+        // console.log(rating);
+
+        const reviewData = {
+            serviceId: id,
+            userEmail: user.email,
+            userName: user.displayName,
+            rating,
+            comment
+        }
+        // console.log(reviewData);
+        instance.post('/reviews', reviewData)
+            .then(res => {
+                //    console.log(res.data);
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        title: "Thank you!",
+                        text: "Your review has been submitted.",
+                        icon: "success"
+                    });
+                    modalRef.current.close();
+                    setRating(0);
+                    setComment("");
+                }
+            })
+    }
+
     if (loading) {
         return <p className='my-20 text-3xl font-bold text-center'>Loading...</p>
     }
@@ -82,7 +122,8 @@ const MyBookings = () => {
                                             <td>{service.customer_email}</td>
                                             <td className='font-bold'>${service.price}</td>
                                             <td>{service.date}</td>
-                                            <td>
+                                            <td className='flex items-center gap-4'>
+                                                <button onClick={() => handleModal(service.service_id)} className='btn btn-xs text-green-800 outline outline-amber-300'>Review</button>
                                                 <button onClick={() => handleCancel(service._id)} className='btn btn-xs text-green-600 outline outline-amber-500'>Cancel</button>
                                             </td>
                                         </tr>
@@ -90,6 +131,35 @@ const MyBookings = () => {
                                 }
                             </tbody>
                         </table>
+
+                        <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
+                            <div className="modal-box">
+                                <h3 className="font-bold text-lg text-center">Give your valuable ratings and reviews</h3>
+                                <form onSubmit={handleReview}>
+                                    <div className='my-5'>
+                                        <div className='flex items-center gap-4'>
+                                            <p className='font-medium text-xl'>Rating: </p>
+                                            <Rating name="half-rating" value={rating} precision={0.5}
+                                                onChange={(e, newValue) => setRating(newValue)}
+                                            />
+                                        </div>
+                                        <textarea
+                                            className='textarea textarea-bordered w-full my-3'
+                                            placeholder='Write your review...'
+                                            value={comment}
+                                            onChange={(e) => setComment(e.target.value)}
+                                            required
+                                        ></textarea>
+                                    </div>
+                                    <button className='btn bg-amber-300'>Submit Review</button>
+                                </form>
+                                <div className="modal-action">
+                                    <form method="dialog">
+                                        <button className="btn">Close</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </dialog>
                     </div>
             }
         </div>

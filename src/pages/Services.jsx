@@ -34,9 +34,9 @@ const Services = () => {
                     <PriceRange maxPrice={maxPrice} setData={setData} />
                 </div>
             </div>
-            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5'>
+            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10'>
                 {
-                    data.length === 0 ? <p className='text-4xl font-bold text-center md:col-span-2 lg:col-span-3 mb-10'>No <span className='text-amber-300'>Service</span> Found</p> :
+                    data.length === 0 ? <p className='text-4xl font-bold text-center md:col-span-2 lg:col-span-3'>No <span className='text-amber-300'>Service</span> Found</p> :
                         data.map(service => <Card2 key={service._id} service={service}></Card2>)
                 }
             </div>

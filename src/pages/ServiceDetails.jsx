@@ -16,6 +16,7 @@ const ServiceDetails = () => {
     const modalRef = useRef()
     const navigate = useNavigate()
     const { user } = use(AuthContext)
+    const [revData, setRevData] = useState([])
 
     useEffect(() => {
         instance.get(`services/${id}`)
@@ -25,6 +26,13 @@ const ServiceDetails = () => {
                 setLoading(false)
             })
     }, [instance, id])
+
+    useEffect(() => {
+        instance.get(`/reviews/${id}`)
+            .then(res => {
+                setRevData(res.data)
+            })
+    }, [id, instance])
 
     const handleBook = (e) => {
         e.preventDefault()
@@ -138,6 +146,36 @@ const ServiceDetails = () => {
                         </div>
                     </dialog>
                 </div>
+            </div>
+            <h1 className='text-2xl font-bold mt-10 text-center'>Reviews</h1>
+            <div className='overflow-x-auto mb-10 mt-6'>
+                {
+                    revData.length === 0 ? <p className='text-2xl font-bold text-center'>No <span className='text-amber-300'>Reviews</span> Yet</p> :
+                        <table className="table border border-black/10 bg-white">
+                            <thead>
+                                <tr>
+                                    <th>SL No.</th>
+                                    <th>User Name</th>
+                                    <th>User Email</th>
+                                    <th>Comment</th>
+                                    <th>Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    revData.map((user, i) =>
+                                        <tr key={user._id}>
+                                            <th>{i + 1}</th>
+                                            <td>{user?.userName}</td>
+                                            <td>{user?.userEmail}</td>
+                                            <td>{user?.comment}</td>
+                                            <td>{user?.rating}</td>
+                                        </tr>
+                                    )
+                                }
+                            </tbody>
+                        </table>
+                }
             </div>
         </div>
     );
