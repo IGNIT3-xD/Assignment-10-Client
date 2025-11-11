@@ -105,7 +105,7 @@ const ServiceDetails = () => {
                     </div>
                     <div className="divider"></div>
                     <p className='text-xl font-bold'>Price: <span className='text-amber-300'>${data?.ratePerHour}</span> / hour</p>
-                    <button onClick={() => modalRef.current.showModal()} className='btn bg-amber-400 mt-3'>Book Now</button>
+                    <button disabled={user?.email === data?.providerEmail} onClick={() => modalRef.current.showModal()} className='btn bg-amber-400 mt-3'>Book Now</button>
                     <button onClick={() => navigate(-1)} className='btn bg-amber-500 mt-3 ml-3'>← Go Back</button>
                     <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
                         <div className="modal-box">

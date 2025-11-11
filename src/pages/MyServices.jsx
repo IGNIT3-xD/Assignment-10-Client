@@ -97,7 +97,7 @@ const MyServices = () => {
     }
 
     return (
-        <div className='w-11/12 mx-auto my-10'>
+        <div className='w-11/12 mx-auto'>
             <h1 className='font-bold text-2xl md:text-3xl text-center my-6'>My <span className='text-amber-300'> Services </span></h1>
             {
                 data.length === 0 ? <p className='text-2xl my-10 text-center font-bold'>Currently you don't have any <span className='text-amber-300'>services</span></p> :
@@ -165,8 +165,7 @@ const MyServices = () => {
                                     <input type="text" name='image' required defaultValue={selectedService.image} className="input" />
 
                                     <label className="label">Description</label>
-                                    <input type="text" name='desc' required defaultValue={selectedService.description} className="input" />
-
+                                    <textarea  name='desc' required defaultValue={selectedService.description} className="textarea" placeholder="Description"></textarea>
                                     <button className="btn bg-amber-300 mt-3">Update Now</button>
                                 </form>
                             </div>

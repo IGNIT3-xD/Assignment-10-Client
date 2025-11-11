@@ -10,6 +10,7 @@ import Register from "../pages/Register";
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import ServiceDetails from "../pages/ServiceDetails";
+import Profile from './../pages/Profile';
 
 export const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
             {
                 path: 'my-bookings',
                 element: <PrivateRoute><MyBookings /></PrivateRoute>
+            },
+            {
+                path: '/profile',
+                element: <PrivateRoute><Profile /></PrivateRoute>
             },
             {
                 path: 'auth/login',

@@ -53,9 +53,9 @@ const AddServices = () => {
     }
 
     return (
-        <div className='w-11/12 mx-auto my-10'>
+        <div className='w-11/12 mx-auto'>
             <h1 className='font-bold text-2xl md:text-3xl text-center my-6'>Add <span className='text-amber-300'> Service </span></h1>
-            <div className='card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mx-auto'>
+            <div className='card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mx-auto my-10'>
                 <form onSubmit={handleAddService} className='card-body'>
                     <label className="label">Service Name</label>
                     <input type="text" name='service' required className="input" placeholder="Service name" />
@@ -79,7 +79,7 @@ const AddServices = () => {
                     <label className="label">Image</label>
                     <input type="text" name='image' required className="input" placeholder="Image" />
                     <label className="label">Description</label>
-                    <input type="text" name='desc' required className="input" placeholder="Description" />
+                    <textarea name='desc' required className="textarea" placeholder="Description"></textarea>
                     <button className='btn bg-amber-300'>Create A Product</button>
                 </form>
             </div>

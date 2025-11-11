@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useAxios } from './../hooks/useAxios';
 import Card2 from './../components/Card2';
+import PriceRange from '../components/PriceRange';
 
 const Services = () => {
     const [data, setData] = useState([])
@@ -24,9 +25,13 @@ const Services = () => {
 
     return (
         <div className='w-11/12 mx-auto'>
-            <h1 className='font-bold text-2xl md:text-3xl text-center my-6'>All <span className='text-amber-300'> Services </span></h1>
-            <div className='divider w-1/2 mx-auto'></div>
-            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10'>
+            <div className='flex flex-col items-center my-6'>
+                <h1 className='font-bold text-2xl lg:text-3xl px-4 text-center'>All <span className='text-amber-300'> Services </span></h1>
+                <div>
+                    <PriceRange />
+                </div>
+            </div>
+            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {
                     data.map(service => <Card2 key={service._id} service={service}></Card2>)
                 }
