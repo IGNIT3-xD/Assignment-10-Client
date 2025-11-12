@@ -73,7 +73,7 @@ const MyServices = () => {
             description: desc,
             image,
         }
-        console.log(upService);
+        // console.log(upService);
         // console.log(selectedService._id);
 
         instance.patch(`/my-services/${selectedService._id}`, upService)
