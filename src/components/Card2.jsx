@@ -34,22 +34,17 @@ const StyledWrapper = styled.div`
   .parent {
     // width: 300px;
     padding: 20px;
+    height:auto;
     perspective: 1000px;
   }
 
   .card {
-    // padding-top: 50px;
-    /* border-radius: 10px; */
+    position: relative;
     border: 3px solid #141414;
     transform-style: preserve-3d;
-    // background: linear-gradient(135deg, #0000 18.75%, #f3f3f3 0 31.25%, #0000 0),
-    //   repeating-linear-gradient(45deg, #f3f3f3 -6.25% 6.25%, #141414 0 18.75%);
-    // background-size: 60px 60px;
-    // background-position:
-    //   0 0,
-    //   0 0;
-    // background-color: #141414;
     width: 100%;
+    height: 100%;
+    overflow: hidden;
     box-shadow: rgba(142, 142, 142, 0.3) 0px 30px 30px -10px;
     transition: all 0.5s ease-in-out;
   }

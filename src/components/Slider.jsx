@@ -24,7 +24,7 @@ const Slider = () => {
         >
 
             <SwiperSlide>
-                <img className='w-full h-[480px] md:h-[600px] object-cover brightness-60' src={Banner1} alt="" />
+                <img className='w-full h-[480px] md:h-[620px] object-cover brightness-60' src={Banner1} alt="" />
                 <div className='text-white text-center absolute inset-0 flex items-center justify-center flex-col gap-4 p-5'>
                     <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold'>House<span className='text-amber-300'> Cleaning </span>Solution</h1>
                     <p className='lg:text-xl mx-auto'>always been so professional in handling our teams.</p>
@@ -33,18 +33,18 @@ const Slider = () => {
             </SwiperSlide>
 
             <SwiperSlide>
-                <img className='w-full h-[480px] md:h-[600px] object-cover brightness-60' src={Banner2} alt="" />
+                <img className='w-full h-[480px] md:h-[620px] object-cover brightness-60' src={Banner2} alt="" />
                 <div className='text-white text-center absolute inset-0 flex items-center justify-center flex-col gap-4 p-5'>
-                    <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold'>House<span className='text-amber-300'> Cleaning </span>Solution</h1>
+                    <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold'>Upgrade Your<span className='text-amber-300'> Family </span>Home</h1>
                     <p className='lg:text-xl mx-auto'>always been so professional in handling our teams.</p>
                     <Button/>
                 </div>
             </SwiperSlide>
 
             <SwiperSlide>
-                <img className='w-full h-[480px] md:h-[600px] object-cover brightness-60' src={Banner3} alt="" />
+                <img className='w-full h-[480px] md:h-[620px] object-cover brightness-60' src={Banner3} alt="" />
                 <div className='text-white text-center absolute inset-0 flex items-center justify-center flex-col gap-4 p-5'>
-                    <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold'>House<span className='text-amber-300'> Cleaning </span>Solution</h1>
+                    <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold'>Find Best<span className='text-amber-300'> Services </span>Across The City</h1>
                     <p className='lg:text-xl mx-auto'>always been so professional in handling our teams.</p>
                     <Button/>
                 </div>

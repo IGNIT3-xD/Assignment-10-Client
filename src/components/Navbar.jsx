@@ -1,4 +1,4 @@
-import React, { use, useEffect } from 'react';
+import React, { use } from 'react';
 import { Link, NavLink } from 'react-router';
 import logo from '../assets/logo.png';
 import { IoMdHome } from "react-icons/io";
@@ -8,9 +8,10 @@ import { MdAddChart } from "react-icons/md";
 import { AuthContext } from './../contexts/AuthContext';
 import { toast } from 'react-toastify';
 import userImg from '../assets/user.png';
+import Switch from './Switch';
 
 const Navbar = () => {
-    const { user, logoutUser, setUser, theme, setTheme } = use(AuthContext)
+    const { user, logoutUser, setUser } = use(AuthContext)
     // const [theme, setTheme] = useState(localStorage.getItem("theme") || "light")
 
     const links = <>
@@ -34,16 +35,16 @@ const Navbar = () => {
             .catch(err => toast.error(err.code))
     }
 
-    useEffect(() => {
-        const html = document.querySelector('html')
-        html.setAttribute("data-theme", theme);
-        localStorage.setItem("theme", theme);
-    }, [theme])
+    // useEffect(() => {
+    //     const html = document.querySelector('html')
+    //     html.setAttribute("data-theme", theme);
+    //     localStorage.setItem("theme", theme);
+    // }, [theme])
 
-    const handleTheme = (checked) => {
-        // console.log(checked);
-        setTheme(checked ? "dark" : "light");
-    }
+    // const handleTheme = (checked) => {
+    //     // console.log(checked);
+    //     setTheme(checked ? "dark" : "light");
+    // }
 
     return (
         <div className="fixed left-1/2 top-0 transform -translate-x-1/2 z-10 navbar backdrop-filter backdrop-blur-lg lg:px-14 shadow-sm">
@@ -73,13 +74,14 @@ const Navbar = () => {
                     !user ?
                         <Link to={'/auth/login'} className='btn bg-amber-300 border-none btn-xs md:btn-md'>Login/Regsister</Link> :
                         <>
-                            <input onChange={(e) => handleTheme(e.target.checked)} type="checkbox" defaultChecked className="toggle toggle-primary mr-3" />
+                            {/* <input onChange={(e) => handleTheme(e.target.checked)} type="checkbox" defaultChecked className="toggle toggle-primary mr-3" /> */}
                             <div className="dropdown">
                                 <div tabIndex={0} role="button" className='flex items-center gap-2 cursor-pointer'>
                                     <img src={user.photoURL ? user.photoURL : userImg} className='w-12 rounded-full ' alt="" />
                                     <p className='font-medium'>{user?.displayName}</p>
                                 </div>
                                 <ul tabIndex="-1" className="space-y-4 dropdown-content menu bg-base-100 rounded-box z-1 w-fit p-2 shadow-sm">
+                                    <li className='mt-2'><Switch /></li>
                                     <li><Link className='hover:text-amber-300' to={'/profile'}>View Profile</Link></li>
                                     <li onClick={handleLogout} className='btn cursor-pointer hover:text-amber-300'>Logout</li>
                                 </ul>

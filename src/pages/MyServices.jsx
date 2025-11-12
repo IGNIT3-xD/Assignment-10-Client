@@ -124,7 +124,7 @@ const MyServices = () => {
                                             <td>{service.providerEmail}</td>
                                             <td className='font-bold'>${service.ratePerHour}</td>
                                             <td className='font-bold'>{service.rating === null ? "--" : service.rating}</td>
-                                            <td className='space-x-4'>
+                                            <td className='flex items-center gap-4'>
                                                 <button onClick={() => handleModal(service)} className='btn btn-xs text-green-600 outline outline-amber-500'>Update</button>
                                                 <button onClick={() => handleDelete(service._id)} className='btn btn-xs text-red-600 outline outline-red-500'>Delete</button>
                                             </td>

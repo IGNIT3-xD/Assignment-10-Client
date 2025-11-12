@@ -28,8 +28,8 @@ const PriceRange = ({ setData }) => {
 
 
     return (
-        <div className="flex flex-wrap justify-between items-center gap-4 bg-base-200 my-6 shadow-md rounded-xl p-6 w-[300px] hover:shadow-xl transition-all">
-            <h1 className="text-center font-medium">Filter By Price Range</h1>
+        <div className="flex flex-wrap justify-between items-center gap-4 my-6 shadow rounded-md p-4 w-[300px] hover:shadow-xl transition-all">
+            <h1 className="text-center font-medium">Filter by price range</h1>
             <div className="w-[280px]">
                 <Range
                     values={values}
@@ -72,8 +72,8 @@ const PriceRange = ({ setData }) => {
                                 onMouseUp={() => setIsDragging(false)}
                                 style={{
                                     ...rest.style,
-                                    height: "20px",
-                                    width: "20px",
+                                    height: "16px",
+                                    width: "16px",
                                     borderRadius: "50%",
                                     backgroundColor: "#fff",
                                     boxShadow: "0 0 10px rgba(59,130,246,0.4)",
@@ -106,6 +106,10 @@ const PriceRange = ({ setData }) => {
                         );
                     }}
                 />
+                <div className="flex justify-between text-sm text-gray-600 mt-2">
+                    <span>${MIN}</span>
+                    <span>${MAX}</span>
+                </div>
             </div>
         </div>
     );
