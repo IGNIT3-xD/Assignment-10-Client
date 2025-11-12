@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useAxios } from '../hooks/useAxios';
 import { use } from 'react';
 import { AuthContext } from './../contexts/AuthContext';
 import Swal from 'sweetalert2';
 import Rating from '@mui/material/Rating';
-import Stack from '@mui/material/Stack';
+import { useAxiosSecure } from '../hooks/useAxiosSecure';
+import Error404 from './Error404';
+import Loader from './../components/Loader';
 
 const MyBookings = () => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
-    const instance = useAxios()
+    const instance = useAxiosSecure()
     const { user } = use(AuthContext)
     const modalRef = useRef()
     const [id, setId] = useState(null)
@@ -89,7 +90,7 @@ const MyBookings = () => {
     }
 
     if (loading) {
-        return <p className='my-20 text-3xl font-bold text-center'>Loading...</p>
+        return <Loader/>
     }
 
     return (

@@ -2,12 +2,13 @@ import React, { use, useEffect, useState } from 'react';
 import { AuthContext } from './../contexts/AuthContext';
 import userImg from '../assets/user.png'
 import { toast } from 'react-toastify';
-import { useAxios } from '../hooks/useAxios';
 import Chart from '../components/Chart';
+import { useAxiosSecure } from '../hooks/useAxiosSecure';
+import Loader from '../components/Loader';
 
 const Profile = () => {
     const { user, setUser, theme, updateUser } = use(AuthContext)
-    const instance = useAxios()
+    const instance = useAxiosSecure()
     const [data, setData] = useState([])
     const [booked, setBooked] = useState([])
     const [myBooking, setMyBooking] = useState([])
@@ -38,7 +39,7 @@ const Profile = () => {
     }, [instance, user])
 
     if (loading) {
-        return <p className='my-20 text-3xl font-bold text-center'>Loading...</p>
+       return <Loader/>
     }
 
     const handleUpdateProfile = (e) => {

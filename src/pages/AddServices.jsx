@@ -1,12 +1,12 @@
 import React, { use } from 'react';
 import { AuthContext } from './../contexts/AuthContext';
-import { useAxios } from './../hooks/useAxios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
+import { useAxiosSecure } from '../hooks/useAxiosSecure';
 
 const AddServices = () => {
     const { user } = use(AuthContext)
-    const instance = useAxios()
+    const instance = useAxiosSecure()
     const navigate = useNavigate()
 
     const handleAddService = (e) => {

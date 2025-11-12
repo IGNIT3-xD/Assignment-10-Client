@@ -3,12 +3,13 @@ import { use } from 'react';
 import { AuthContext } from './../contexts/AuthContext';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useAxios } from './../hooks/useAxios';
 import Swal from 'sweetalert2';
+import { useAxiosSecure } from '../hooks/useAxiosSecure';
+import Loader from './../components/Loader';
 
 const MyServices = () => {
     const { user } = use(AuthContext)
-    const instance = useAxios()
+    const instance = useAxiosSecure()
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const modalRef = useRef()
@@ -93,7 +94,7 @@ const MyServices = () => {
     }
 
     if (loading) {
-        return <p className='my-20 text-3xl font-bold text-center'>Loading...</p>
+        return <Loader/>
     }
 
     return (

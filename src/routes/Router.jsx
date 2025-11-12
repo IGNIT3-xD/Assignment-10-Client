@@ -11,10 +11,13 @@ import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import ServiceDetails from "../pages/ServiceDetails";
 import Profile from './../pages/Profile';
+import Error404 from "../pages/Error404";
+import Loader from './../components/Loader';
 
 export const router = createBrowserRouter([
     {
-        hydrateFallbackElement: <p className="text-2xl font-bold text-center my-10">Loading...</p>,
+        errorElement: <Error404 />,
+        hydrateFallbackElement: <Loader />,
         path: "/",
         Component: Root,
         children: [

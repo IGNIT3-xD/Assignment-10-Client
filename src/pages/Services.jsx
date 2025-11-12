@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useAxios } from './../hooks/useAxios';
 import Card2 from './../components/Card2';
 import PriceRange from '../components/PriceRange';
+import Loader from './../components/Loader';
 
 const Services = () => {
     const [data, setData] = useState([])
@@ -30,7 +31,7 @@ const Services = () => {
     }
 
     if (loading) {
-        return <p className='my-20 text-3xl font-bold text-center'>Loading...</p>
+        return <Loader/>
     }
 
     const maxPrice = Math.max(...data.map(service => service.ratePerHour || 0))

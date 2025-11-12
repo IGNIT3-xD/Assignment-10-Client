@@ -1,18 +1,19 @@
 import React, { use, useRef } from 'react';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { useAxios } from '../hooks/useAxios';
 import { useEffect } from 'react';
 import { FaRegStar } from "react-icons/fa";
 import { AuthContext } from './../contexts/AuthContext';
 import Swal from 'sweetalert2';
+import { useAxiosSecure } from '../hooks/useAxiosSecure';
+import Loader from './../components/Loader';
 
 const ServiceDetails = () => {
     const { id } = useParams()
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
-    const instance = useAxios()
+    const instance = useAxiosSecure()
     const modalRef = useRef()
     const navigate = useNavigate()
     const { user, theme } = use(AuthContext)
@@ -86,7 +87,7 @@ const ServiceDetails = () => {
     }
 
     if (loading) {
-        return <p className='my-20 text-3xl font-bold text-center'>Loading...</p>
+       return <Loader/>
     }
 
     return (
