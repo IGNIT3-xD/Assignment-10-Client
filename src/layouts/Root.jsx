@@ -12,7 +12,7 @@ const Root = () => {
                 <Outlet></Outlet>
             </div>
             <Footer></Footer>
-            
+
             <ToastContainer />
         </div>
     );

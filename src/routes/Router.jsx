@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home />,
-                loader: () => fetch('http://localhost:5000/top-services').then(res => res.json())
+                loader: () => fetch('https://herohomeserver.vercel.app/top-services').then(res => res.json())
             },
             {
                 path: 'services',

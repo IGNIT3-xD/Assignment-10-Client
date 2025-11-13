@@ -7,6 +7,7 @@ import { AuthContext } from './../contexts/AuthContext';
 import Swal from 'sweetalert2';
 import { useAxiosSecure } from '../hooks/useAxiosSecure';
 import Loader from './../components/Loader';
+import { motion } from 'motion/react';
 
 const ServiceDetails = () => {
     const { id } = useParams()
@@ -86,17 +87,36 @@ const ServiceDetails = () => {
             })
     }
 
+    const fadeInLeft = {
+        hidden: { opacity: 0, x: -50 },
+        visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
+    }
+    const fadeInRight = {
+        hidden: { opacity: 0, x: 50 },
+        visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
+    }
+
     if (loading) {
-       return <Loader/>
+        return <Loader />
     }
 
     return (
         <div className='my-10 w-11/12 mx-auto'>
             <div className='flex flex-col lg:flex-row gap-8 shadow p-4'>
-                <figure className={`p-2 border border-black/5 ${theme === 'dark' && 'border-white/20'} rounded-sm`}>
+                <motion.figure
+                    variants={fadeInLeft}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className={`p-2 border border-black/5 ${theme === 'dark' && 'border-white/20'} rounded-sm`}>
                     <img className='mx-auto object-contain h-full rounded-sm md:w-full lg:w-96' src={data?.image} alt="" />
-                </figure>
-                <div className='flex-1'>
+                </motion.figure>
+                <motion.div
+                    variants={fadeInRight}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className='flex-1'>
                     <p className='text-2xl font-bold'>{data?.serviceName}</p>
                     <p className={`text-black/60 ${theme === 'dark' && 'text-white/60'} mt-3`}>{data?.description}</p>
                     <div className="divider"></div>
@@ -109,12 +129,12 @@ const ServiceDetails = () => {
                             <span>Rating: <span className='m-1 text-amber-300'>{data?.rating}</span></span>
                             <FaRegStar className='text-amber-300' />
                         </p>
-                        <p className='badge badge-warning mt-3'>{data?.category}</p>
+                        <p className='badge bg-amber-300 mt-3'>{data?.category}</p>
                     </div>
                     <div className="divider"></div>
                     <p className='text-xl font-bold'>Price: <span className='text-amber-300'>${data?.ratePerHour}</span> / hour</p>
-                    <button disabled={user?.email === data?.providerEmail} onClick={() => modalRef.current.showModal()} className='btn bg-amber-400 mt-3'>Book Now</button>
-                    <button onClick={() => navigate(-1)} className='btn bg-amber-500 mt-3 ml-3'>← Go Back</button>
+                    <button disabled={user?.email === data?.providerEmail} onClick={() => modalRef.current.showModal()} className='btn bg-amber-300 mt-3'>Book Now</button>
+                    <button onClick={() => navigate(-1)} className='btn outline outline-amber-300 mt-3 ml-3'>← Go Back</button>
                     <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
                         <div className="modal-box">
                             <h3 className="font-bold text-2xl text-center">Book Our Service Now !!</h3>
@@ -145,7 +165,7 @@ const ServiceDetails = () => {
                             </div>
                         </div>
                     </dialog>
-                </div>
+                </motion.div>
             </div>
             <h1 className='text-2xl font-bold mt-10 text-center'>Reviews</h1>
             <div className='overflow-x-auto mb-10 mt-6'>

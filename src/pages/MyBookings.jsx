@@ -6,6 +6,7 @@ import Rating from '@mui/material/Rating';
 import { useAxiosSecure } from '../hooks/useAxiosSecure';
 import Error404 from './Error404';
 import Loader from './../components/Loader';
+import { ScrollAnim } from './../components/ScrollAnim';
 
 const MyBookings = () => {
     const [data, setData] = useState([])
@@ -90,7 +91,7 @@ const MyBookings = () => {
     }
 
     if (loading) {
-        return <Loader/>
+        return <Loader />
     }
 
     return (
@@ -98,70 +99,72 @@ const MyBookings = () => {
             <h1 className='font-bold text-2xl md:text-3xl text-center my-6'>My <span className='text-amber-300'> Bookings </span> <span className='text-xs'>({data.length})</span> </h1>
             {
                 data.length === 0 ? <p className='text-2xl my-10 text-center font-bold'>Currently you don't have any <span className='text-amber-300'>booking</span></p> :
-                    <div className='my-20 overflow-x-auto'>
-                        <table className="table bg-base-300">
-                            <thead>
-                                <tr>
-                                    <th>SL No.</th>
-                                    <th>Service Name</th>
-                                    <th>Provider Email</th>
-                                    <th>Customer Phone No.</th>
-                                    <th>Customer Email</th>
-                                    <th>Service Price</th>
-                                    <th>Service Date</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    data.map((service, i) =>
-                                        <tr key={service._id}>
-                                            <th>{i + 1}</th>
-                                            <td>{service.service_name}</td>
-                                            <td>{service.provider_email}</td>
-                                            <td>{service.customer_phone}</td>
-                                            <td>{service.customer_email}</td>
-                                            <td className='font-bold'>${service.price}</td>
-                                            <td>{service.date}</td>
-                                            <td className='flex items-center gap-4'>
-                                                <button onClick={() => handleModal(service.service_id)} className='btn btn-xs text-green-800 outline outline-amber-300'>Review</button>
-                                                <button onClick={() => handleCancel(service._id)} className='btn btn-xs text-green-600 outline outline-amber-500'>Cancel</button>
-                                            </td>
-                                        </tr>
-                                    )
-                                }
-                            </tbody>
-                        </table>
+                    <ScrollAnim>
+                        <div className='my-20 overflow-x-auto'>
+                            <table className="table bg-base-200">
+                                <thead>
+                                    <tr>
+                                        <th>SL No.</th>
+                                        <th>Service Name</th>
+                                        <th>Provider Email</th>
+                                        <th>Customer Phone No.</th>
+                                        <th>Customer Email</th>
+                                        <th>Service Price</th>
+                                        <th>Service Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        data.map((service, i) =>
+                                            <tr key={service._id}>
+                                                <th>{i + 1}</th>
+                                                <td>{service.service_name}</td>
+                                                <td>{service.provider_email}</td>
+                                                <td>{service.customer_phone}</td>
+                                                <td>{service.customer_email}</td>
+                                                <td className='font-bold'>${service.price}</td>
+                                                <td>{service.date}</td>
+                                                <td className='flex items-center gap-4'>
+                                                    <button onClick={() => handleModal(service.service_id)} className='btn btn-xs text-green-800 outline outline-amber-300'>Review</button>
+                                                    <button onClick={() => handleCancel(service._id)} className='btn btn-xs text-green-600 outline outline-amber-500'>Cancel</button>
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
+                                </tbody>
+                            </table>
 
-                        <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
-                            <div className="modal-box">
-                                <h3 className="font-bold text-lg text-center">Give your valuable ratings and reviews</h3>
-                                <form onSubmit={handleReview}>
-                                    <div className='my-5'>
-                                        <div className='flex items-center gap-4'>
-                                            <p className='font-medium text-xl'>Rating: </p>
-                                            <Rating name="half-rating" value={rating} precision={0.5}
-                                                onChange={(e, newValue) => setRating(newValue)}
-                                            />
+                            <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
+                                <div className="modal-box">
+                                    <h3 className="font-bold text-lg text-center">Give your valuable ratings and reviews</h3>
+                                    <form onSubmit={handleReview}>
+                                        <div className='my-5'>
+                                            <div className='flex items-center gap-4'>
+                                                <p className='font-medium text-xl'>Rating: </p>
+                                                <Rating name="half-rating" value={rating} precision={0.5}
+                                                    onChange={(e, newValue) => setRating(newValue)}
+                                                />
+                                            </div>
+                                            <textarea
+                                                className='textarea textarea-bordered w-full my-3'
+                                                placeholder='Write your review...'
+                                                value={comment}
+                                                onChange={(e) => setComment(e.target.value)}
+                                                required
+                                            ></textarea>
                                         </div>
-                                        <textarea
-                                            className='textarea textarea-bordered w-full my-3'
-                                            placeholder='Write your review...'
-                                            value={comment}
-                                            onChange={(e) => setComment(e.target.value)}
-                                            required
-                                        ></textarea>
-                                    </div>
-                                    <button className='btn bg-amber-300'>Submit Review</button>
-                                </form>
-                                <div className="modal-action">
-                                    <form method="dialog">
-                                        <button className="btn">Close</button>
+                                        <button className='btn bg-amber-300'>Submit Review</button>
                                     </form>
+                                    <div className="modal-action">
+                                        <form method="dialog">
+                                            <button className="btn">Close</button>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                        </dialog>
-                    </div>
+                            </dialog>
+                        </div>
+                    </ScrollAnim>
             }
         </div>
     );

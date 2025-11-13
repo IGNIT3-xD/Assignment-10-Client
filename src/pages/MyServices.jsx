@@ -6,6 +6,7 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useAxiosSecure } from '../hooks/useAxiosSecure';
 import Loader from './../components/Loader';
+import { ScrollAnim } from './../components/ScrollAnim';
 
 const MyServices = () => {
     const { user } = use(AuthContext)
@@ -94,7 +95,7 @@ const MyServices = () => {
     }
 
     if (loading) {
-        return <Loader/>
+        return <Loader />
     }
 
     return (
@@ -102,39 +103,41 @@ const MyServices = () => {
             <h1 className='font-bold text-2xl md:text-3xl text-center my-6'>My <span className='text-amber-300'> Services </span></h1>
             {
                 data.length === 0 ? <p className='text-2xl my-10 text-center font-bold'>Currently you don't have any <span className='text-amber-300'>services</span></p> :
-                    <div className='my-20 overflow-x-auto'>
-                        <table className="table border border-base-300 bg-base-300">
-                            <thead>
-                                <tr>
-                                    <th>SL No.</th>
-                                    <th>Service Name</th>
-                                    <th>Provider Name</th>
-                                    <th>Provider Email</th>
-                                    <th>Service Price</th>
-                                    <th>Rating</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    data.map((service, i) =>
-                                        <tr key={service._id}>
-                                            <th>{i + 1}</th>
-                                            <td>{service.serviceName}</td>
-                                            <td>{service.providerName}</td>
-                                            <td>{service.providerEmail}</td>
-                                            <td className='font-bold'>${service.ratePerHour}</td>
-                                            <td className='font-bold'>{service.rating === null ? "--" : service.rating}</td>
-                                            <td className='flex items-center gap-4'>
-                                                <button onClick={() => handleModal(service)} className='btn btn-xs text-green-600 outline outline-amber-500'>Update</button>
-                                                <button onClick={() => handleDelete(service._id)} className='btn btn-xs text-red-600 outline outline-red-500'>Delete</button>
-                                            </td>
-                                        </tr>
-                                    )
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+                    <ScrollAnim>
+                        <div className='my-20 overflow-x-auto'>
+                            <table className="table border border-base-300 bg-base-200">
+                                <thead>
+                                    <tr>
+                                        <th>SL No.</th>
+                                        <th>Service Name</th>
+                                        <th>Provider Name</th>
+                                        <th>Provider Email</th>
+                                        <th>Service Price</th>
+                                        <th>Rating</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        data.map((service, i) =>
+                                            <tr key={service._id}>
+                                                <th>{i + 1}</th>
+                                                <td>{service.serviceName}</td>
+                                                <td>{service.providerName}</td>
+                                                <td>{service.providerEmail}</td>
+                                                <td className='font-bold'>${service.ratePerHour}</td>
+                                                <td className='font-bold'>{service.rating === null ? "--" : service.rating}</td>
+                                                <td className='flex items-center gap-4'>
+                                                    <button onClick={() => handleModal(service)} className='btn btn-xs text-green-600 outline outline-amber-500'>Update</button>
+                                                    <button onClick={() => handleDelete(service._id)} className='btn btn-xs text-red-600 outline outline-red-500'>Delete</button>
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </ScrollAnim>
             }
             <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
