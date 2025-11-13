@@ -77,8 +77,8 @@ const Navbar = () => {
                             {/* <input onChange={(e) => handleTheme(e.target.checked)} type="checkbox" defaultChecked className="toggle toggle-primary mr-3" /> */}
                             <div className="dropdown">
                                 <div tabIndex={0} role="button" className='flex items-center gap-2 cursor-pointer'>
-                                    <img src={user.photoURL ? user.photoURL : userImg} className='w-12 h-12 object-cover rounded-full ' alt="" />
-                                    <p className='font-medium'>{user?.displayName}</p>
+                                    <img src={user.photoURL ? user.photoURL : userImg} className='w-11 h-11 object-cover rounded-full ' alt="" />
+                                    <p className='font-medium text-sm md:text-[16px]'>{user?.displayName}</p>
                                 </div>
                                 <ul tabIndex="-1" className="space-y-4 dropdown-content menu bg-base-100 rounded-box z-1 w-fit p-2 shadow-sm">
                                     <li className='mt-2'><Switch /></li>

@@ -8,10 +8,6 @@ const Choose = () => {
         hidden: { opacity: 0, y: 50 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
     }
-    const fadeInX = {
-        hidden: { opacity: 0, x: 50 },
-        visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
-    }
 
     return (
         <div className='my-10 grid lg:grid-cols-4 lg:gap-4'>
@@ -37,7 +33,7 @@ const Choose = () => {
                     <p className='opacity-80'>We believe every household is different, which is why we tailor our services to match your lifestyle and preferences. Whether it’s cleaning, repairs, maintenance, or installations. Our goal is to make your life easier by offering hassle-free, flexible solutions that fit your schedule.</p>
                 </motion.div>
                 <motion.div
-                    variants={fadeInX}
+                    variants={fadeInUp}
                     initial="hidden"
                     whileInView="visible"
                     className={`border lg:col-span-2 border-black/30 ${theme === 'dark' && 'border-white/30'} rounded-md p-4`}>
@@ -48,7 +44,7 @@ const Choose = () => {
             </div>
             <div>
                 <motion.div
-                    variants={fadeInX}
+                    variants={fadeInUp}
                     initial="hidden"
                     whileInView="visible"
                     className={`border border-black/30 ${theme === 'dark' && 'border-white/30'} h-full rounded-md p-4`}>
