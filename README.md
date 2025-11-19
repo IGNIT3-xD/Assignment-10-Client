@@ -24,17 +24,18 @@ https://herohome-8c1d7.web.app/
 - Cross platform
 
 
+## How to setup project
+
+```bash
+  cd my-project
+  git clone https://github.com/IGNIT3-xD/Warmpaws.git
+  npm i
+  npm run dev
+```
+
 ![Logo](https://i.ibb.co/v4G8qxy3/logo.png)
-
-
-## Screenshots
-
-![App Screenshot](https://i.ibb.co/xqCjtKT5/Screenshot-1.png)
-![App Screenshot](https://i.ibb.co/7JMhs0MS/Screenshot-2.png)
-![App Screenshot](https://i.ibb.co/20BHjrVB/Screenshot-3.png)
-![App Screenshot](https://i.ibb.co/hRdMv4dg/Screenshot-4.png)
-
 
 ## Feedback
 
 If you have any feedback, please reach out to us at md.imranali@gmail.com
+
